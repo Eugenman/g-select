@@ -1,23 +1,13 @@
 <template lang="pug">
   #app
+    PageHome
 </template>
 
 <script>
+import PageHome from '@/views/PageHome.vue';
 
 export default {
   name: 'App',
-  components: {
-  },
+  components: { PageHome },
 };
 </script>
-
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
