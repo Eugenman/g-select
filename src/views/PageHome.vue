@@ -32,6 +32,8 @@
       )
         template(v-slot:placeholder="")
           .custom Custom placeholder
+        template(v-slot:option="{ option, index}")
+          div {{ option.index + 1 }}
       div {{ `Selected value: ${selectedValue2 ? selectedValue2 : 'Empty'}` }}
       g-select(
         v-model="selectedValue2"
@@ -41,6 +43,22 @@
         :color="color"
         label="label"
         :reduce="option => option.value"
+      )
+      div {{ `Selected value: ${selectedValue3 ? selectedValue3 : 'Empty'}` }}
+      g-select(
+        v-model="selectedValue3"
+        :options="objectsOptions1"
+        :disabled="selectDisabled"
+        :maxWidth="maxWidth"
+        :color="color"
+        label="label"
+        :reduce="option => option.value"
+      )
+      div 'No options'
+      g-select(
+        :disabled="selectDisabled"
+        :maxWidth="maxWidth"
+        :color="color"
       )
 </template>
 
@@ -55,23 +73,12 @@ export default {
       maxWidth: null,
       selectedValue1: null,
       selectedValue2: null,
+      selectedValue3: null,
+      selectedValue4: null,
       stringOptions: ['Option 1', 'Option 2', 'Option 3'],
       objectsOptions: [{ label: 'Option 1', value: 1 }, { label: 'Option 2', value: 2 }],
+      objectsOptions1: [{ label: 'Option 1', value: 1, icon: '✕' }, { label: 'Option 2', value: 2, icon: '▼️' }],
     };
   },
 };
 </script>
-
-<style lang="sass">
-  .page-home
-    margin: 30px auto
-    width: 100%
-    height: fit-content
-    max-width: 800px
-    display: grid
-    grid-template: 1fr / 1fr
-  .rows
-    display: grid
-    grid-template: repeat(2, 1fr) / repeat(2, 1fr)
-    grid-gap: 10px
-</style>

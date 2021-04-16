@@ -22,16 +22,17 @@
     .g-selected
       display: flex
       .value,
-      .placeholder
+      .g-placeholder
         width: 100%
         padding: 0 10px
         display: flex
         justify-content: flex-start
         align-items: center
         user-select: none
-      .placeholder,
-      .default
-        color: #cccccc
+      .g-placeholder
+        &__custom,
+        &__default
+          color: #cccccc
     .g-select__actions
       display: flex
       justify-content: space-around
@@ -65,7 +66,25 @@
     z-index: 100
     .option
       padding: 5px 10px
+      display: flex
+      justify-content: flex-start
+      align-items: center
       cursor: pointer
       transition: all .2s ease-in-out
+      .option__icon
+        width: 14px
+        display: flex
+        justify-content: center
+        align-items: center
+        margin-right: 5px
+      .option__value
+        width: 100%
+        display: flex
+        justify-content: space-between
       &:hover
         background: #cccccc
+    .no-options
+      padding: 5px 10px
+      display: flex
+      justify-content: center
+      align-items: center

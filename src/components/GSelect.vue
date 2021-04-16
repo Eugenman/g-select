@@ -1,27 +1,27 @@
 <template lang="pug">
   .g-select-wrapper(
-    v-bind="$attrs"
     :style="{maxWidth: maxWidth ? `${maxWidth}px` : null}"
   )
     .g-select(
+      v-bind="$attrs"
       @click="!disabled ? toggleOptions() : null"
       @blur="handleOptionsVisible()"
       :tabindex="0"
       :class="[{'open': optionsShown}, {'disabled': disabled}]"
-      :style="{backgroundColor: color}"
+      :style="{backgroundColor: color ? color : null}"
     )
       .g-selected
         .value(
           v-if="selected"
         ) {{ optionLabel }}
-        .placeholder(
+        .g-placeholder(
           v-else
         )
-          .custom-placeholder(
+          .g-placeholder__custom(
             v-if="$slots.placeholder"
           )
             slot(name="placeholder")
-          .default(
+          .g-placeholder__default(
             v-else
           ) Select option
       .g-select__actions
@@ -39,7 +39,20 @@
           v-for="(option, index) in options"
           :key="`${index}`"
           @click.stop="[handleOptionSelect(option), emitOption(option), handleOptionsVisible()]"
-        ) {{ reduce && typeof option === 'object' ? option.label : option }}
+        )
+          .option__icon(
+            v-if="option.icon"
+          ) {{ option.icon }}
+          .option__value
+            .value {{ reduce && typeof option === 'object' ? option.label : option }}
+            .slot
+              slot(
+                name="option"
+                v-bind:option="{ option, index }"
+              )
+        .no-options(
+          v-if="options.length === 0"
+        ) {{ noOptionsLabel }}
 </template>
 
 <script>
@@ -70,6 +83,10 @@ export default {
     maxWidth: {
       type: String,
       default: null,
+    },
+    noOptionsLabel: {
+      type: String,
+      default: 'No options',
     },
   },
   data() {

@@ -1,6 +1,11 @@
 .page-home
   margin: 30px auto
   width: 100%
+  height: fit-content
   max-width: 800px
   display: grid
   grid-template: 1fr / 1fr
+  .rows
+    display: grid
+    grid-template: repeat(2, 1fr) / repeat(2, 1fr)
+    grid-gap: 10px
